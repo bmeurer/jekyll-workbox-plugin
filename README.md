@@ -145,7 +145,6 @@ Or if you're using [Firebase](https://firebase.google.com), put something like t
 ```json
 {
   "hosting": {
-    /* ... */
     "headers": [
       {
         "source": "/sw.js",
