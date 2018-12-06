@@ -110,7 +110,7 @@ workbox.routing.registerRoute(
 );
 ```
 
-Make sure to follow the [Service Worker Checklist](https://developers.google.com/web/tools/workbox/guides/service-worker-checklist) from the Workbox documentation, specifically insert this snippet in your JavaScript code somewhere
+Make sure to follow the [Service Worker Checklist](https://developers.google.com/web/tools/workbox/guides/service-worker-checklist) from the Workbox documentation. Insert this snippet in your JavaScript code somewhere:
 
 ```js
 if ('serviceWorker' in navigator) {
@@ -120,7 +120,7 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-i.e. put it inline into the header of every page
+i.e. put it inline near the closing `</body>` tag of every page:
 
 ```html
 <script>
@@ -132,7 +132,7 @@ i.e. put it inline into the header of every page
 </script>
 ```
 
-or into your JavaScript bundle. And also make sure to set the `Cache-Control` HTTP header to `no-cache` for the `sw.js` file. For example when using [Netlify](https://www.netlify.com) just put this snippet into your `_headers` file:
+...or into your JavaScript bundle. And also make sure to set the `Cache-Control` HTTP header to `no-cache` for the `sw.js` file. For example when using [Netlify](https://www.netlify.com) just put this snippet into your `_headers` file:
 
 ```
 # _headers
