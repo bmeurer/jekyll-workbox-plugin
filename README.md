@@ -38,7 +38,7 @@ $ gem install jekyll-workbox-plugin
 
 After the plugin has been installed successfully, add the following lines to your `_config.yml` in order to tell Jekyll to use the plugin:
 
-```
+```yaml
 plugins:
 - jekyll-workbox-plugin
 ```
