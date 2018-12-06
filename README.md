@@ -165,6 +165,7 @@ Just fork this repository, make changes and submit a pull request, or just file 
 # Copyright
 
 Copyright (c) 2018 Benedikt Meurer.
+
 Copyright (c) 2017 Pan Yuqi.
 
 License: MIT
