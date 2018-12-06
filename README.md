@@ -49,7 +49,7 @@ plugins:
 
 Add the following configuration block to Jekyll's `_config.yml`:
 ```yaml
-pwa:
+workbox:
   sw_src_filepath: sw.js # Optional
   sw_dest_filename: sw.js # Optional
   precache_recent_posts_num: 5 # Optional
