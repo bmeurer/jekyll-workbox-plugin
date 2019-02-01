@@ -57,6 +57,9 @@ workbox:
   precache_glob_patterns: # Optional
     - "{js,css,fonts}/**/*.{js,css,eot,svg,ttf,woff}"
     - index.html
+    - about.html: # This entry aliases about/ and contact/ to about.html
+        - about/
+        - contact/
   precache_glob_ignores: # Optional
     - "fonts/**/*"
 ```
@@ -66,7 +69,7 @@ Parameter                 | Description
 sw_src_filepath           | Filepath of the source service worker. Defaults to `sw.js`
 sw_dest_filename          | Filename of the destination service worker. Defaults to `sw.js`
 precache_glob_directory   | Directory of precache. [Workbox Config](https://developers.google.com/web/tools/workbox/get-started/webpack#optional-config)
-precache_glob_patterns    | Patterns of precache. [Workbox Config](https://developers.google.com/web/tools/workbox/get-started/webpack#optional-config)
+precache_glob_patterns    | Patterns of precache. Accepts aliased names pointing to the same file to support pretty permalinks [Workbox Config](https://developers.google.com/web/tools/workbox/get-started/webpack#optional-config)
 precache_glob_ignores     | Ignores of precache. [Workbox Config](https://developers.google.com/web/tools/workbox/get-started/webpack#optional-config)
 precache_recent_posts_num | Number of recent posts to precache.
 
