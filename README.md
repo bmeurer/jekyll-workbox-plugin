@@ -57,7 +57,7 @@ workbox:
   precache_glob_patterns: # Optional
     - "{js,css,fonts}/**/*.{js,css,eot,svg,ttf,woff}"
     - index.html
-    - about.html: # This entry aliases about/ and contact/ to about.html
+    - "about.html": # This entry aliases about/ and contact/ to about.html
         - about/
         - contact/
   precache_glob_ignores: # Optional
