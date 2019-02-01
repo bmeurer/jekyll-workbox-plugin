@@ -21,8 +21,31 @@ class WorkboxHelper
         # find precache files with glob
         precache_files = []
         patterns.each do |pattern|
-            Dir.glob(File.join(directory, pattern)) do |filepath|
-                precache_files.push(filepath)
+            name_to_aliases = {}
+
+            # this means there's no alias defined - just use file as only alias
+            if pattern.is_a?(String)
+                name_to_aliases = { pattern => pattern }
+            elsif pattern.is_a?(Hash)
+                name_to_aliases = pattern
+            end
+
+            # at this point, name_to_aliases is file -> alias or 
+            # file -> [alias1, alias2], etc. there will never be more
+            # than one key per yaml conventions
+            filename, aliases = name_to_aliases.first
+
+            # glob the filename, and push all aliases as just values
+            Dir.glob(File.join(directory, filename)) do |filepath|
+                if aliases.is_a?(String)
+                    file_alias = File.join(directory, aliases)
+                    precache_files.push({ filepath => file_alias })
+                elsif aliases.is_a?(Array)
+                    aliases.each do |filepath_alias|
+                        file_alias = File.join(directory, filepath_alias)
+                        precache_files.push({ filepath => file_alias })
+                    end
+                end
             end
         end
         precache_files = precache_files.uniq
@@ -35,7 +58,7 @@ class WorkboxHelper
                     .reverse.take(recent_posts_num)
                     .map do |post|
                         posts_path_url_map[post.path] = post.url
-                        post.path
+                        { post.path => post.path }
                     end
             )
         end
@@ -43,19 +66,22 @@ class WorkboxHelper
         # filter with ignores
         ignores.each do |pattern|
             Dir.glob(File.join(directory, pattern)) do |ignored_filepath|
-                precache_files.delete(ignored_filepath)
+                precache_files = precache_files.select { |file_map|
+                    file_map.first.first != ignored_filepath
+                }.map{ |file_map| file_map }
             end
         end
 
         # generate md5 for each precache file
         md5 = Digest::MD5.new
-        precache_files.each do |filepath|
+        precache_files.each do |filepath_map|
+            filepath, filepath_alias = filepath_map.first
             md5.reset
             md5 << File.read(filepath)
             if posts_path_url_map[filepath]
                 url = posts_path_url_map[filepath]
             else
-                url = filepath.sub(@site.dest, '')
+                url = filepath_alias.sub(@site.dest, '')
             end
             @precache_list.push({
                 url: @site.baseurl.to_s + url,
