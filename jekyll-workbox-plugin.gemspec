@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'jekyll-workbox-plugin'
   s.version     = '0.0.2'
-  s.date        = '2019-01-19'
+  s.date        = '2019-02-01'
   s.summary     = 'Workbox support for Jekyll.'
   s.description = 'This plugin provides workbox support for Jekyll. Generate a service worker and provides precache with Google Workbox.'
   s.authors     = ['Benedikt Meurer']
